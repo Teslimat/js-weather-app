@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="src/app.css" />
     <title>JS Weather App</title>
-</head>
+  </head>
 
-<body>
-    <h1>Hello</h1>
-</body>
+  <body>
+    <div class="weather-app">
+      <header>
+        <form>
+          <input
+            type="text"
+            placeholder="Search for a city..."
+            autofocus="on"
+            autocomplete="off"
+            required
+            class="search-input" />
+          <input type="submit" value="Search" class="submit-button" />
+        </form>
+      </header>
+
+      <main>
+        <div class="weather-data">
+          <div class="weather-data-details">
+            <h1 class="weather-data-city">San Francisco</h1>
+            <p class="weather-data-date">September 25, 2015</p>
+            <img
+              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
+              alt="" class="weather-data-icon" />
+            <h2 class="weather-data-condition">Cloudy</h2>
+          </div>
+          <div>
+            <h3 class="weather-data-temperature">72°</h3>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        This project was coded by
+        <a href="https://github.com/Teslimat" target="_blank"
+          >Teslimat Adeyemi</a
+        >, is
+        <a
+          href="https://github.com/Teslimat/weather-application-project"
+          target="_blank">
+          open-sourced on Github</a
+        >
+        and
+        <a href="https://teslimat-weatherapp.netlify.app" target="_blank">
+          hosted on Netlify</a
+        >
+      </footer>
+    </div>
+  </body>
 </html>
