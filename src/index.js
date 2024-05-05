@@ -10,7 +10,7 @@ function handleResponse(response) {
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = `${Math.round(temperature)}°`;
   descriptionElement.innerHTML = response.data.condition.description;
-  dateElement.innerHTML=formatDate(date)
+  dateElement.innerHTML = formatDate(date);
 }
 
 function searchCity(city) {
@@ -22,7 +22,7 @@ function searchCity(city) {
 
 function formatDate(date) {
   let minutes = date.getMinutes();
-  let hours = date.getHours();
+  let hours = date.getHours() % 12 || 12;
   let day = date.getDate();
   let year = date.getFullYear();
 
@@ -42,8 +42,17 @@ function formatDate(date) {
   ];
   let month = months[date.getMonth()];
 
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-  return `${month} ${day}, ${year} <br /> ${minutes}:${hours} `
+  if (hours < 12) {
+    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} AM`;
+  } else {
+    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} PM`;
+  }
+
+  //   return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
 }
 
 function searchForm(event) {
