@@ -1,15 +1,59 @@
-function searchCity(city){
-    let apiKey = "92dd828taa17b53d1feo43a40bd1ab2f";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
-    
+function handleResponse(response) {
+  console.log(response.data);
+  let cityElement = document.querySelector("#weather-data-city");
+  let temperatureElement = document.querySelector("#weather-data-temperature");
+  let temperature = response.data.temperature.current;
+  let descriptionElement = document.querySelector("#weather-data-condition");
+  let dateElement = document.querySelector("#weather-data-date");
+  let date = new Date(response.data.time * 1000);
+
+  cityElement.innerHTML = response.data.city;
+  temperatureElement.innerHTML = `${Math.round(temperature)}°`;
+  descriptionElement.innerHTML = response.data.condition.description;
+  dateElement.innerHTML=formatDate(date)
 }
 
-function searchForm(event){
-    event.preventDefault();
+function searchCity(city) {
+  let apiKey = "92dd828taa17b53d1feo43a40bd1ab2f";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(handleResponse);
+}
 
-    let searchInput = document.querySelector("#search-input");
-    console.log(searchInput.value)
+function formatDate(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let day = date.getDate();
+  let year = date.getFullYear();
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+
+
+  return `${month} ${day}, ${year} <br /> ${minutes}:${hours} `
+}
+
+function searchForm(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-input");
+
+  searchCity(searchInput.value);
 }
 
 let formElement = document.querySelector("#search-form");
-formElement.addEventListener("Submit", searchForm)
+formElement.addEventListener("submit", searchForm);
+
+searchCity("San Francisco");
