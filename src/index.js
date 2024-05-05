@@ -15,8 +15,7 @@ function handleResponse(response) {
   iconElement.innerHTML = `
    <img
               src="${response.data.condition.icon_url}"
-              alt="" class="weather-data-icon" />`
-              ;
+              alt="" class="weather-data-icon" />`;
 }
 
 function searchCity(city) {
@@ -61,6 +60,32 @@ function formatDate(date) {
   //   return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
 }
 
+function dislayForecast() {
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+  let forecastHtml = ""
+
+  days.forEach(function(day){
+    forecastHtml =
+      forecastHtml +
+      `
+<div class="weather-forecast-day">
+<div class="weather-forecast-date">${day}</div>
+
+<div class="weather-forecast-icon">🌤️</div>
+<div class="weather-forecast-temperatures">
+<div class="weather-forecast-temperature">
+<strong>18°</strong>
+</div>
+<div class="weatherforecast-temperature">9°</div>
+</div>
+</div>
+`;
+  })
+  
+    let forecastElement = document.querySelector("#weather-forecast");
+  forecastElement.innerHTML = forecastHtml
+}
+
 function searchForm(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
@@ -72,3 +97,4 @@ let formElement = document.querySelector("#search-form");
 formElement.addEventListener("submit", searchForm);
 
 searchCity("San Francisco");
+dislayForecast();
