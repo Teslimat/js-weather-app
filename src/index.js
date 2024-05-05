@@ -6,11 +6,17 @@ function handleResponse(response) {
   let descriptionElement = document.querySelector("#weather-data-condition");
   let dateElement = document.querySelector("#weather-data-date");
   let date = new Date(response.data.time * 1000);
+  let iconElement = document.querySelector("#weather-data-icon");
 
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = `${Math.round(temperature)}°`;
   descriptionElement.innerHTML = response.data.condition.description;
   dateElement.innerHTML = formatDate(date);
+  iconElement.innerHTML = `
+   <img
+              src="${response.data.condition.icon_url}"
+              alt="" class="weather-data-icon" />`
+              ;
 }
 
 function searchCity(city) {

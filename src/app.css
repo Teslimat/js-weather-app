@@ -10,7 +10,7 @@ a{
 .weather-app{
     background: linear-gradient(to top, #dfe9f3 0%, white 100%);
     width: 700px;
-    margin: 60px auto;
+    margin: 100px auto;
     padding: 30px 20px;
     border-radius: 20px;
 }
@@ -78,8 +78,8 @@ main {
 }
 
 .weather-data-temperature{
-    font-size: 99px;
-    line-height: 99px;
+    font-size: 100px;
+    line-height: 100px;
     font-weight: 400;
     margin-top: 0;
 }
