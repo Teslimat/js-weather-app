@@ -30,7 +30,7 @@ function searchCity(city) {
 
 function formatDate(date) {
   let minutes = date.getMinutes();
-  let hours = date.getHours() % 12 || 12;
+  let hours = date.getHours();
   let day = date.getDate();
   let year = date.getFullYear();
 
