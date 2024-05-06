@@ -81,11 +81,17 @@ main {
   width: 88px;
   height: 88px;
 }
-.weather-data-condition {
+.weather-data-description {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
   color: #63a2ef;
+}
+
+.weather-data-condition{
+ font-weight: 400;
+ opacity: 0.6;
+ color: #63a2ef;
 }
 
 .weather-data-temperature {

@@ -3,16 +3,20 @@ function handleResponse(response) {
   let cityElement = document.querySelector("#weather-data-city");
   let temperatureElement = document.querySelector("#weather-data-temperature");
   let temperature = response.data.temperature.current;
-  let descriptionElement = document.querySelector("#weather-data-condition");
+  let descriptionElement = document.querySelector("#weather-data-description");
   let dateElement = document.querySelector("#weather-data-date");
   let date = new Date(response.data.time * 1000);
   let iconElement = document.querySelector("#weather-data-icon");
+  let humidityElement = document.querySelector("#weather-humidity");
+  let windElement = document.querySelector("#weather-wind");
 
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = `${Math.round(temperature)}°`;
   descriptionElement.innerHTML = response.data.condition.description;
   dateElement.innerHTML = formatDate(date);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="" class="weather-data-icon" />`;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`
+  windElement.innerHTML = `${response.data.wind.speed}Km/h`
 
   getForecast(response.data.city);
 }
@@ -59,12 +63,11 @@ function formatDate(date) {
   //   return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
 }
 
-function formatDay(timestamp){
-    let date = new Date(timestamp * 1000);
-    let days = ["Sun", "Mon", "Tue","Wed", "Thu", "Fri", "Sat"]
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-
-    return days[date.getDay()]
+  return days[date.getDay()];
 }
 
 function getForecast(city) {
@@ -74,15 +77,15 @@ function getForecast(city) {
 }
 
 function dislayForecast(response) {
-  console.log(response.data);
+  //   console.log(response.data);
 
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
     if (index < 5) {
-    forecastHtml =
-      forecastHtml +
-      `
+      forecastHtml =
+        forecastHtml +
+        `
 <div class="weather-forecast-day">
 <div class="weather-forecast-date">${formatDay(day.time)}</div>
 
@@ -94,8 +97,8 @@ function dislayForecast(response) {
 <strong>${Math.round(day.temperature.maximum)}°</strong>
 </div>
 <div class="weatherforecast-temperature">${Math.round(
-        day.temperature.minimum
-      )}°</div>
+          day.temperature.minimum
+        )}°</div>
 </div>
 </div>
 `;
