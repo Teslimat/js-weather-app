@@ -12,10 +12,9 @@ function handleResponse(response) {
   temperatureElement.innerHTML = `${Math.round(temperature)}°`;
   descriptionElement.innerHTML = response.data.condition.description;
   dateElement.innerHTML = formatDate(date);
-  iconElement.innerHTML = `
-   <img
-              src="${response.data.condition.icon_url}"
-              alt="" class="weather-data-icon" />`;
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="" class="weather-data-icon" />`;
+
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -60,30 +59,51 @@ function formatDate(date) {
   //   return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
 }
 
-function dislayForecast() {
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-  let forecastHtml = ""
+function formatDay(timestamp){
+    let date = new Date(timestamp * 1000);
+    let days = ["Sun", "Mon", "Tue","Wed", "Thu", "Fri", "Sat"]
 
-  days.forEach(function(day){
+
+    return days[date.getDay()]
+}
+
+function getForecast(city) {
+  let apiKey = "92dd828taa17b53d1feo43a40bd1ab2f";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(dislayForecast);
+}
+
+function dislayForecast(response) {
+  console.log(response.data);
+
+  let forecastHtml = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
     forecastHtml =
       forecastHtml +
       `
 <div class="weather-forecast-day">
-<div class="weather-forecast-date">${day}</div>
+<div class="weather-forecast-date">${formatDay(day.time)}</div>
 
-<div class="weather-forecast-icon">🌤️</div>
+<div >
+<img src="${day.condition.icon_url}" class="weather-forecast-icon" />
+</div>
 <div class="weather-forecast-temperatures">
 <div class="weather-forecast-temperature">
-<strong>18°</strong>
+<strong>${Math.round(day.temperature.maximum)}°</strong>
 </div>
-<div class="weatherforecast-temperature">9°</div>
+<div class="weatherforecast-temperature">${Math.round(
+        day.temperature.minimum
+      )}°</div>
 </div>
 </div>
 `;
-  })
-  
-    let forecastElement = document.querySelector("#weather-forecast");
-  forecastElement.innerHTML = forecastHtml
+    }
+  });
+
+  let forecastElement = document.querySelector("#weather-forecast");
+  forecastElement.innerHTML = forecastHtml;
 }
 
 function searchForm(event) {
@@ -97,4 +117,3 @@ let formElement = document.querySelector("#search-form");
 formElement.addEventListener("submit", searchForm);
 
 searchCity("San Francisco");
-dislayForecast();
