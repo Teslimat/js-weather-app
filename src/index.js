@@ -55,12 +55,10 @@ function formatDate(date) {
   }
 
   if (hours < 12) {
-    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} AM`;
-  } else {
-    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} PM`;
+    hours = `0${hours}`;
   }
 
-  //   return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
+    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
 }
 
 function formatDay(timestamp) {
