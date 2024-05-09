@@ -119,4 +119,4 @@ function searchForm(event) {
 let formElement = document.querySelector("#search-form");
 formElement.addEventListener("submit", searchForm);
 
-searchCity("San Francisco");
+searchCity("Lagos");
