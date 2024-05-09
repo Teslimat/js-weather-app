@@ -170,11 +170,13 @@ footer {
 
   .weather-data-condition{
     font-size: 10px;
+    font-weight: 500;
   }
 
   .weather-data-temperature {
     font-size: 70px;
     margin-top: 40px;
+    font-weight: 600;
   }
 
   .weather-forecast {
