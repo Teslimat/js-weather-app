@@ -14,9 +14,9 @@ function handleResponse(response) {
   temperatureElement.innerHTML = `${Math.round(temperature)}°`;
   descriptionElement.innerHTML = response.data.condition.description;
   dateElement.innerHTML = formatDate(date);
-  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="" class="weather-data-icon" />`;
-  humidityElement.innerHTML = `${response.data.temperature.humidity}%`
-  windElement.innerHTML = `${response.data.wind.speed}Km/h`
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="Weather Icon" class="weather-data-icon" />`;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+  windElement.innerHTML = `${response.data.wind.speed}Km/h`;
 
   getForecast(response.data.city);
 }
@@ -58,7 +58,7 @@ function formatDate(date) {
     hours = `0${hours}`;
   }
 
-    return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `
+  return `${month} ${day}, ${year} <br /> ${hours}:${minutes} `;
 }
 
 function formatDay(timestamp) {
@@ -88,7 +88,9 @@ function dislayForecast(response) {
 <div class="weather-forecast-date">${formatDay(day.time)}</div>
 
 <div >
-<img src="${day.condition.icon_url}" class="weather-forecast-icon" />
+<img src="${
+          day.condition.icon_url
+        }" alt="Weather Forecast Icons" class="weather-forecast-icon" />
 </div>
 <div class="weather-forecast-temperatures">
 <div class="weather-forecast-temperature">
